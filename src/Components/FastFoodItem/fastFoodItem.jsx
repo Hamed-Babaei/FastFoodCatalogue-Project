@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import "./fastFoodItem.css";
 import { HiShoppingCart } from "react-icons/hi";
 import { useDispatch } from "react-redux";
-import { addExistItem, addToCart } from "../../Redux/Store/CartReducer";
+import { addToCart } from "../../Redux/Store/CartReducer";
 const FastFoodItem = ({
   name,
   price,
@@ -33,8 +33,8 @@ const FastFoodItem = ({
           className="btn btn-outline-success btn-sm w-100 mt-auto fw-bold"
           onClick={() =>
             dispatch(
-              addExistItem({
-                id: crypto.randomUUID(),
+              addToCart({
+                id: Math.floor(Math.random() * 100),
                 title: name,
                 price: price,
                 img: imageUrl,

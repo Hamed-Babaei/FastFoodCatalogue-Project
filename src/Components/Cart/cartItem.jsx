@@ -2,7 +2,7 @@ import React from "react";
 import { RiCloseCircleLine } from "react-icons/ri";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { removeItem, incrementValue } from "../../Redux/Store/CartReducer";
+import { removeItem, increase, decrease } from "../../Redux/Store/CartReducer";
 
 const CartItem = ({ id, img, title, price, quantity }) => {
   const dispatch = useDispatch();
@@ -24,13 +24,18 @@ const CartItem = ({ id, img, title, price, quantity }) => {
         <label className="form-label">تعداد :</label>
         <br />
         <button
-          onClick={() => dispatch(incrementValue(id))}
+          onClick={() => dispatch(increase(id))}
           className="btn btn-info btn-shadow btn-sm ms-2"
         >
           +
         </button>
         <span>{quantity}</span>
-        <button className="btn btn-info btn-shadow btn-sm me-2">-</button>
+        <button
+          className="btn btn-info btn-shadow btn-sm me-2"
+          onClick={() => dispatch(decrease(id))}
+        >
+          -
+        </button>
         <br />
         <button
           className="btn btn-link text-danger pe-0"

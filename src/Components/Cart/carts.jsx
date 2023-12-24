@@ -1,14 +1,21 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import CartItem from "./cartItem";
 import { RiShoppingCartLine } from "react-icons/ri";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import { removeAllItems } from "../../Redux/Store/CartReducer";
+import { cartTotal, removeAllItems } from "../../Redux/Store/CartReducer";
+
 const Cart = () => {
   const dispatch = useDispatch();
-  const carts = useSelector((state) => state.cart);
-  // console.log(carts);
+  const { items, totalAmount } = useSelector((state) => state.cart);
+  console.log("items;", items);
+  console.log("totalAmount;", totalAmount);
+  // console.log(items);
+
+  useEffect(() => {
+    dispatch(cartTotal(items));
+  }, [items]);
 
   let renderedContent = (
     <>
@@ -17,12 +24,12 @@ const Cart = () => {
     </>
   );
 
-  if (carts.length > 0) {
-    console.log(carts);
+  if (items.length > 0) {
+    console.log(items);
     renderedContent = (
       <>
         <div className="col-lg-8 col-md-7 pt-sm-2">
-          {carts.map((item) => {
+          {items.map((item) => {
             return <CartItem key={item.id} {...item} />;
           })}
         </div>
@@ -30,7 +37,7 @@ const Cart = () => {
         <div className="col-lg-4 col-md-5 pt-3 pt-sm-4 border-end">
           <div className="text-center mb-4 pb-3 border-bottom">
             <h3 className="h5 mb-3 pb-1">جمع کل</h3>
-            <h4 className="fw-normal">0 تومان</h4>
+            <h4 className="fw-normal">{totalAmount.toLocaleString()} تومان</h4>
           </div>
           <a
             onClick={() => dispatch(removeAllItems())}

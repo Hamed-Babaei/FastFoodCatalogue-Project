@@ -4,7 +4,7 @@ import { RiShoppingCartLine } from "react-icons/ri";
 import { Link } from "react-router-dom";
 
 const Header = () => {
-  const cart = useSelector((state) => state.cart);
+  const cart = useSelector((state) => state.cart.items);
 
   return (
     <header className="bg-size-cover bg-position-center py-5">

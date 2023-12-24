@@ -1,56 +1,79 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 // import data from "../../data";
 
-export const addExistItem = createAsyncThunk(
-  "Cart/addExistItem",
-  async (state, action) => {
-    console.log("state:", state);
-    console.log("action:", action.payload);
-  }
-);
-
 const slice = createSlice({
   name: "cart",
-  initialState: [],
+  initialState: {
+    items: [],
+    totalAmount: 0,
+    totalCount: 0,
+  },
   // initialState: data,
   reducers: {
     removeItem: (state, action) => {
-      const filteredItems = state.filter((item) => item.id !== action.payload);
-      return filteredItems;
+      console.log(state);
+      console.log(action);
+      state.items = state.items.filter((item) => item.id !== action.payload);
     },
-    incrementValue: (state, action) => {
+    increase: (state, action) => {
       console.log("state", state);
       console.log("action", action);
-      let newState = [...state];
-      const terget = newState.valueOf(0);
-      console.log(terget[0]);
-      // const terget = newState.map((item) => item.id === action.payload);
-      // console.log(terget);
-      // newState[action.payload].quantity++;
-      // return newState;
 
-      // const quantity = targetedItem.quantity;
+      state.items = state.items.map((item) => {
+        if (item.id === action.payload) {
+          return { ...item, quantity: item.quantity + 1 };
+        }
+        return item;
+      });
+    },
+    decrease: (state, action) => {
+      state.items = state.items
+        .map((item) => {
+          if (item.id === action.payload) {
+            return { ...item, quantity: item.quantity - 1 };
+          }
+          return item;
+        })
+        .filter((item) => item.quantity !== 0);
     },
     addToCart: (state, action) => {
       // console.log("state:", state);
       // console.log("action:", action);
-      state.push(action.payload);
+      state.items.push(action.payload);
     },
-    removeAllItems: () => {
-      return [];
+    removeAllItems: (state) => {
+      state.items = [];
     },
-  },
-  extraReducers: (builder) => {
-    builder.addCase(addExistItem.fulfilled, (state, action) => {
+    cartTotal: (state, action) => {
       console.log("state:", state);
-      console.log("action:", action.payload);
+      console.log("action:", action);
+      let { totalAmount, totalCount } = action.payload.reduce(
+        (cartTotal, cartItem) => {
+          const { price, quantity } = cartItem;
+          const itemTotal = price * quantity;
 
-      // state.push(action.payload);
-    });
+          cartTotal.totalAmount += itemTotal;
+          cartTotal.totalCount += quantity;
+          return cartTotal;
+        },
+        {
+          totalAmount: 0,
+          totalCount: 0,
+        }
+      );
+      state.totalAmount = parseInt(totalAmount.toFixed(2));
+      state.totalCount = totalCount;
+    },
   },
 });
 
 export default slice.reducer;
 
-export const { removeAllItems, removeItem, incrementValue, addToCart } =
-  slice.actions;
+export const {
+  removeAllItems,
+  removeItem,
+  increase,
+  decrease,
+  addToCart,
+  cartTotal,
+} = slice.actions;
