@@ -21,15 +21,16 @@ const CartItem = ({ id, img, title, price, quantity }) => {
         </div>
       </div>
       <div className="pt-2 pt-sm-0 ps-sm-3 mx-auto mx-sm-0 text-center text-sm-end">
-        <label className="form-label">تعداد</label>
+        <label className="form-label">تعداد :</label>
+        <br />
         <button
           onClick={() => dispatch(incrementValue(id))}
-          className="btn btn-info btn-shadow"
+          className="btn btn-info btn-shadow btn-sm ms-2"
         >
           +
         </button>
         <span>{quantity}</span>
-        <button className="btn btn-info btn-shadow">-</button>
+        <button className="btn btn-info btn-shadow btn-sm me-2">-</button>
         <br />
         <button
           className="btn btn-link text-danger pe-0"
