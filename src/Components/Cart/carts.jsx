@@ -1,11 +1,14 @@
 import React, { useState } from "react";
-import { useCartContext } from "../context";
+
 import CartItem from "./cartItem";
 import { RiShoppingCartLine } from "react-icons/ri";
 import { useSelector } from "react-redux";
-
+import { useDispatch } from "react-redux";
+import { removeAllItems } from "../../Redux/Store/CartReducer";
 const Cart = () => {
-  const { cart, clearCart, total } = useCartContext();
+  const dispatch = useDispatch();
+  const carts = useSelector((state) => state.cart);
+  // console.log(carts);
 
   let renderedContent = (
     <>
@@ -14,11 +17,12 @@ const Cart = () => {
     </>
   );
 
-  if (cart.length > 0) {
+  if (carts.length > 0) {
+    console.log(carts);
     renderedContent = (
       <>
         <div className="col-lg-8 col-md-7 pt-sm-2">
-          {cart.map((item) => {
+          {carts.map((item) => {
             return <CartItem key={item.id} {...item} />;
           })}
         </div>
@@ -26,10 +30,10 @@ const Cart = () => {
         <div className="col-lg-4 col-md-5 pt-3 pt-sm-4 border-end">
           <div className="text-center mb-4 pb-3 border-bottom">
             <h3 className="h5 mb-3 pb-1">جمع کل</h3>
-            <h4 className="fw-normal">{total.toLocaleString()} تومان</h4>
+            <h4 className="fw-normal">0 تومان</h4>
           </div>
           <a
-            onClick={clearCart}
+            onClick={() => dispatch(removeAllItems())}
             className="btn btn-primary btn-shadow d-block w-100 mt-4"
           >
             حذف همه آیتم ها

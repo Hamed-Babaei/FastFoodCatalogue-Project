@@ -1,9 +1,10 @@
 import { RiShoppingCartLine } from "react-icons/ri";
 import React from "react";
-import { useCartContext } from "../context";
+import { useSelector } from "react-redux";
 
 const Navbar = () => {
-  const {cart} = useCartContext();
+  const cart = useSelector((state) => state.cart);
+  // console.log(cart);
   return (
     <header className="navbar navbar-dark bg-dark shadow-sm">
       <div className="container">

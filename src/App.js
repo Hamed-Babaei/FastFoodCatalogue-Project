@@ -4,6 +4,9 @@ import routes from "./routes";
 import { useSelector, useDispatch } from "react-redux";
 
 export default function App() {
+  const cart = useSelector((state) => state.cart);
+  console.log(cart);
+
   const router = useRoutes(routes);
   return <>{router}</>;
 }

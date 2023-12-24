@@ -1,9 +1,11 @@
 import React from "react";
-
+import Navbar from "../Components/Cart/navbar";
+import Carts from "../Components/Cart/carts";
 export default function Cart() {
   return (
-    <div>
-      <h1>Cart</h1>
-    </div>
+    <>
+      <Navbar />
+      <Carts />
+    </>
   );
 }
