@@ -2,21 +2,11 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import "./fastFoodItem.css";
 import { HiShoppingCart } from "react-icons/hi";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { addToCart } from "../../Redux/Store/CartReducer";
-const FastFoodItem = ({
-  id,
-  name,
-  price,
-  ingredients,
-  imageUrl,
-
-  delay,
-}) => {
+const FastFoodItem = ({ name, price, ingredients, imageUrl, delay }) => {
   const [isThereValue, setIsThereValue] = useState(false);
-
   const dispatch = useDispatch();
-
   const clickHandler = (e) => {
     e.preventDefault();
     setIsThereValue(true);

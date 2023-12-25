@@ -2,23 +2,15 @@ import { useDispatch, useSelector } from "react-redux";
 import "./header.css";
 import { RiShoppingCartLine } from "react-icons/ri";
 import { Link } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { cartTotal } from "../../Redux/Store/CartReducer";
 
 const Header = () => {
   const dispatch = useDispatch();
   const { items, totalCount } = useSelector((state) => state.cart);
-  console.log("items;", items);
-  console.log("totalAmount;", totalCount);
-  // console.log(items);
-
   useEffect(() => {
     dispatch(cartTotal(items));
   }, [items]);
-
-  console.log("items In Navbar:", items);
-
-  useEffect(() => {}, [items]);
   return (
     <header className="bg-size-cover bg-position-center py-5">
       <div className="container">

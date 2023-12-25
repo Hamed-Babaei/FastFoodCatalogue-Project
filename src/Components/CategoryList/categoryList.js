@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import Loading from "../Loading/loading";
 import useAxios from "../../useAxios";
 

@@ -1,4 +1,4 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 // import data from "../../data";
 
 const slice = createSlice({
@@ -11,14 +11,9 @@ const slice = createSlice({
   // initialState: data,
   reducers: {
     removeItem: (state, action) => {
-      console.log(state);
-      console.log(action);
       state.items = state.items.filter((item) => item.id !== action.payload);
     },
     increase: (state, action) => {
-      console.log("state", state);
-      console.log("action", action);
-
       state.items = state.items.map((item) => {
         if (item.id === action.payload) {
           return { ...item, quantity: item.quantity + 1 };
@@ -37,16 +32,12 @@ const slice = createSlice({
         .filter((item) => item.quantity !== 0);
     },
     addToCart: (state, action) => {
-      // console.log("state:", state);
-      // console.log("action:", action);
       state.items.push(action.payload);
     },
     removeAllItems: (state) => {
       state.items = [];
     },
     cartTotal: (state, action) => {
-      console.log("state:", state);
-      console.log("action:", action);
       let { totalAmount, totalCount } = action.payload.reduce(
         (cartTotal, cartItem) => {
           const { price, quantity } = cartItem;
@@ -65,8 +56,6 @@ const slice = createSlice({
       state.totalCount = totalCount;
     },
     getTotalCount: (state, action) => {
-      console.log("state:", state);
-      console.log("action:", action);
       let { totalAmount, totalCount } = action.payload.reduce(
         (cartTotal, cartItem) => {
           const { price, quantity } = cartItem;
@@ -88,7 +77,6 @@ const slice = createSlice({
 });
 
 export default slice.reducer;
-
 export const {
   removeAllItems,
   removeItem,

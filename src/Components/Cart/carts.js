@@ -10,10 +10,6 @@ import { Link } from "react-router-dom";
 const Cart = () => {
   const dispatch = useDispatch();
   const { items, totalAmount } = useSelector((state) => state.cart);
-  console.log("items;", items);
-  console.log("totalAmount;", totalAmount);
-  // console.log(items);
-
   useEffect(() => {
     dispatch(cartTotal(items));
   }, [items]);
@@ -26,7 +22,6 @@ const Cart = () => {
   );
 
   if (items.length > 0) {
-    console.log(items);
     renderedContent = (
       <>
         <div className="col-lg-8 col-md-7 pt-sm-2">
