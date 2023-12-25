@@ -50,10 +50,13 @@ const Cart = () => {
     <>
       <div className="page-title-overlap bg-dark pt-1">
         <div className="container d-lg-flex justify-content-between py-3">
-          <div className="order-lg-1 pe-lg-4 text-center text-lg-start d-flex align-items-end flex-grow-1  justify-content-between">
-            <h1 className="h3 text-light mb-0 mt-3">سبد خرید</h1>
-            <Link to={"/"} className="fs-5 ms-3">
-              <IoArrowForwardOutline className="ms-1" />
+          <div className="order-lg-1 pe-lg-4 text-center text-lg-start d-flex align-items-center flex-grow-1  justify-content-between">
+            <h1 className="h3 text-light mb-0">سبد خرید</h1>
+            <Link
+              to={"/"}
+              className="fs-5 ms-3 btn btn-outline-success btn-shadow "
+            >
+              <IoArrowForwardOutline className="ms-1 " />
               بازگشت
             </Link>
           </div>
