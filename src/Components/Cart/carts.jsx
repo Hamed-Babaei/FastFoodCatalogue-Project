@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from "react";
-
+import React, { useEffect } from "react";
+import { IoArrowForwardOutline } from "react-icons/io5";
 import CartItem from "./cartItem";
 import { RiShoppingCartLine } from "react-icons/ri";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { cartTotal, removeAllItems } from "../../Redux/Store/CartReducer";
+import { Link } from "react-router-dom";
 
 const Cart = () => {
   const dispatch = useDispatch();
@@ -54,8 +55,12 @@ const Cart = () => {
     <>
       <div className="page-title-overlap bg-dark pt-1">
         <div className="container d-lg-flex justify-content-between py-3">
-          <div className="order-lg-1 pe-lg-4 text-center text-lg-start">
+          <div className="order-lg-1 pe-lg-4 text-center text-lg-start d-flex align-items-end flex-grow-1  justify-content-between">
             <h1 className="h3 text-light mb-0 mt-3">سبد خرید</h1>
+            <Link to={"/"} className="fs-5 ms-3">
+              <IoArrowForwardOutline className="ms-1" />
+              بازگشت
+            </Link>
           </div>
         </div>
       </div>

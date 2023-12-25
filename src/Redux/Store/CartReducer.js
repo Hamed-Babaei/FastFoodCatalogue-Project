@@ -64,6 +64,26 @@ const slice = createSlice({
       state.totalAmount = parseInt(totalAmount.toFixed(2));
       state.totalCount = totalCount;
     },
+    getTotalCount: (state, action) => {
+      console.log("state:", state);
+      console.log("action:", action);
+      let { totalAmount, totalCount } = action.payload.reduce(
+        (cartTotal, cartItem) => {
+          const { price, quantity } = cartItem;
+          const itemTotal = price * quantity;
+
+          cartTotal.totalAmount += itemTotal;
+          cartTotal.totalCount += quantity;
+          return cartTotal;
+        },
+        {
+          totalAmount: 0,
+          totalCount: 0,
+        }
+      );
+      state.totalAmount = parseInt(totalAmount.toFixed(2));
+      state.totalCount = totalCount;
+    },
   },
 });
 

@@ -1,17 +1,35 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import "./fastFoodItem.css";
 import { HiShoppingCart } from "react-icons/hi";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../../Redux/Store/CartReducer";
 const FastFoodItem = ({
+  id,
   name,
   price,
   ingredients,
   imageUrl,
-  quantity,
+
   delay,
 }) => {
+  const [isThereValue, setIsThereValue] = useState(false);
+
   const dispatch = useDispatch();
+
+  const clickHandler = (e) => {
+    e.preventDefault();
+    setIsThereValue(true);
+    dispatch(
+      addToCart({
+        id: Math.floor(Math.random() * 100),
+        title: name,
+        price: price,
+        img: imageUrl,
+        quantity: 1,
+      })
+    );
+  };
   return (
     <div
       className="card product-card h-100 border-0 shadow-sm pb-1 fade-in-horiz"
@@ -29,23 +47,26 @@ const FastFoodItem = ({
           {name}
         </Link>
         <div className="fs-ms fw-bold text-muted mb-3">{ingredients}</div>
-        <button
-          className="btn btn-outline-success btn-sm w-100 mt-auto fw-bold"
-          onClick={() =>
-            dispatch(
-              addToCart({
-                id: Math.floor(Math.random() * 100),
-                title: name,
-                price: price,
-                img: imageUrl,
-                quantity: quantity === 1 ? quantity++ : 1,
-              })
-            )
-          }
-        >
-          <HiShoppingCart className="fs-5 ms-3" />
-          افزودن به سبد خرید
-        </button>
+        {isThereValue ? (
+          <>
+            <Link
+              to={"/cart"}
+              className="btn btn-success btn-sm w-100 mt-auto fw-bold"
+            >
+              با موفقیت به سبد خرید اضافه شد
+            </Link>
+          </>
+        ) : (
+          <>
+            <button
+              className="btn btn-outline-success btn-sm w-100 mt-auto fw-bold"
+              onClick={clickHandler}
+            >
+              <HiShoppingCart className="fs-5 ms-1" />
+              افزودن به سبد خرید
+            </button>
+          </>
+        )}
       </div>
     </div>
   );
