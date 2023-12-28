@@ -26,7 +26,7 @@ const FastFoodItem = ({ name, price, ingredients, imageUrl, delay }) => {
       style={{ animationDelay: delay + "s" }}
     >
       <span className="badge badge-end badge-shadow bg-success fs-md fw-medium">
-        قیمت : {price.toLocaleString()} تومان
+        قیمت : {price.toLocaleString("fa-IR")} تومان
       </span>
       <div className="card__placeholder">
         <img src={imageUrl} className="card-img-top" />

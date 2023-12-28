@@ -16,7 +16,7 @@ const CartItem = ({ id, img, title, price, quantity }) => {
             <p style={{ paddingTop: "0.5rem" }}>{title}</p>
           </Link>
           <div className="fs-lg text-accent pt-2">
-            {price.toLocaleString()} تومان
+            {price.toLocaleString("fa-IR")} تومان
           </div>
         </div>
       </div>
@@ -29,7 +29,7 @@ const CartItem = ({ id, img, title, price, quantity }) => {
         >
           +
         </button>
-        <span>{quantity}</span>
+        <span>{quantity.toLocaleString("fa-IR")}</span>
         <button
           className={`btn btn-info btn-shadow btn-sm me-2 ${
             quantity === 1 ? "disabled" : ""
